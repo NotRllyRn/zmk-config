@@ -9,21 +9,6 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-        macros {
-                alt_space: alt_space {
-                label = "ZM_alt_space";
-                compatible = "zmk,behavior-macro";
-                #binding-cells = <0>;
-                bindings
-                        = <&macro_press &kp LALT>
-                        , <&macro_tap &kp SPACE>
-                        , <&macro_release &kp LALT>
-                        ;
-                };
-        };
-};
-
-/ {
         keymap {
                 compatible = "zmk,keymap";
 
@@ -50,7 +35,7 @@
    &kp GRAVE    &kp N1   &kp UP   &kp N2    &kp N3       &kp N4       |  &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
    &kp TAB      &kp LEFT &kp DOWN &kp RIGHT &kp N5       &kp N6       |  &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
    &kp LSHFT    &trans   &trans   &trans    &trans       &trans       |  &trans   &trans   &trans &trans    &trans &trans
-                        &kp LGUI  &trans    &alt_space                |  &kp RET  &trans   &kp RALT
+                        &kp LGUI  &trans    &trans                |  &kp RET  &trans   &kp RALT
                         >;
                 };
 
