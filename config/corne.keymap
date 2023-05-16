@@ -27,6 +27,28 @@
                 <&macro_release>,
                 <&kp LALT>;
         };
+        screenshot: screenshot {
+            compatible = "zmk,behavior-macro";
+            label = "SCREENSHOT";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_GUI>,
+                <&macro_press>,
+                <&kp LEFT_SHIFT>,
+                <&macro_tap>,
+                <&kp S>,
+                <&macro_release>,
+                <&kp LEFT_SHIFT>,
+                <&macro_release>,
+                <&kp LGUI>;
+        };
+        somestring: somestring {
+            compatible = "zmk,behavior-macro";
+            label = "SOMESTRING";
+            #binding-cells = <0>;
+            bindings = <&kp M &kp O &kp U &kp S &kp E &kp SPACE &kp C &kp A &kp L &kp C &kp U &kp L &kp A &kp T &kp O &kp R &kp SPACE &kp T &kp O &kp W &kp E &kp L &kp SPACE &kp B &kp A &kp S &kp E &kp SPACE &kp T &kp R &kp A &kp S &kp H &kp C &kp A &kp N &kp SPACE &kp C &kp O &kp R &kp A &kp L &kp SPACE &kp E &kp Y &kp E &kp S &kp SPACE &kp C &kp A &kp B &kp L &kp E &kp SPACE &kp E &kp X &kp P &kp L &kp O &kp S &kp I &kp O &kp N &kp SPACE &kp F &kp O &kp L &kp D &kp E &kp D &kp SPACE &kp T &kp H &kp I &kp N &kp K &kp SPACE &kp P &kp L &kp A &kp S &kp T &kp I &kp C &kp SPACE &kp S &kp C &kp A &kp N &kp SPACE &kp O &kp C &kp T &kp A &kp G &kp O &kp N>;
+        };
     };
 
     keymap {
@@ -40,14 +62,16 @@
             //                    | SPC | LWR | LGUI|   | RSE | SPC  | ENT |
 
             bindings = <
-  &kp ESC  &kp Q  &kp W      &kp E  &kp R     &kp T       &kp Y      &kp U      &kp I    &kp O     &kp P  &kp BSPC
-&kp LCTRL  &kp A  &kp S      &kp D  &kp F     &kp G       &kp H      &kp J      &kp K    &kp L  &kp SEMI   &kp SQT
-&kp LSHFT  &kp Z  &kp X      &kp C  &kp V     &kp B       &kp N      &kp M  &kp COMMA  &kp DOT  &kp FSLH   &kp ESC
-                         &kp SPACE  &mo 1  &kp LGUI    &mo TEST  &kp SPACE    &kp RET
+  &kp TAB  &kp Q  &kp W      &kp E  &kp R  &kp T       &kp Y      &kp U      &kp I    &kp O     &kp P  &kp BSPC
+&kp LCTRL  &kp A  &kp S      &kp D  &kp F  &kp G       &kp H      &kp J      &kp K    &kp L  &kp SEMI   &kp SQT
+&kp LSHFT  &kp Z  &kp X      &kp C  &kp V  &kp B       &kp N      &kp M  &kp COMMA  &kp DOT  &kp FSLH   &kp ESC
+                         &kp SPACE  &mo 1  &mo 2    &mo TEST  &kp SPACE    &kp RET
             >;
+
+            label = "DEFAULT";
         };
 
-        lower_layer {
+        game_layer {
             // -----------------------------------------------------------------------------------------
             // |  `   |  1  |  UP |  2  |  3  |  4  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
             // | TAB  | LFT | DWN | RGT |  5  |  6  |   | LFT | DWN |  UP | RGT |     |      |
@@ -55,14 +79,16 @@
             //                    | LGUI|     | ALSP|   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE  &kp N1    &kp N2      &kp UP     &kp N3        &kp N4    &bootloader  &sys_reset    &kp UP      &none  &bt BT_NXT  &bt BT_PRV
-  &kp TAB   &none  &kp LEFT    &kp DOWN  &kp RIGHT        &kp N6          &none    &kp LEFT  &kp DOWN  &kp RIGHT       &none  &bt BT_CLR
-   &kp F1  &kp F2    &kp F3      &kp F4     &kp F5        &kp F6         &kp F7      &kp F8    &kp F9    &kp F10     &kp F11     &kp F12
-                             &alt_space  &kp SPACE  &kp LEFT_GUI         &tog 1   &kp SPACE    &tog 0
+ &kp ESCAPE       &kp N1    &kp N2      &kp UP     &kp N3        &kp N4    &bootloader      &none    &kp UP      &none    &bt BT_NXT  &bt BT_PRV
+&bootloader  &screenshot  &kp LEFT    &kp DOWN  &kp RIGHT        &kp N6     &sys_reset   &kp LEFT  &kp DOWN  &kp RIGHT  &bt BT_SEL 0  &bt BT_CLR
+     &kp F1       &kp F2    &kp F3      &kp F4     &kp F5        &kp F6         &kp F7     &kp F8    &kp F9    &kp F10       &kp F11     &kp F12
+                                    &alt_space  &kp SPACE  &kp LEFT_GUI         &tog 1  &kp SPACE    &tog 0
             >;
+
+            label = "GAMING";
         };
 
-        raise_layer {
+        functional_layer {
             // -----------------------------------------------------------------------------------------
             // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
             // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
@@ -70,20 +96,24 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-  &kp TAB  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET   &kp AMPS  &kp KP_MULTIPLY  &kp LPAR  &kp RPAR   &kp BSPC
-&kp LCTRL    &trans  &trans    &trans    &trans     &trans    &kp MINUS  &kp EQUAL         &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT    &trans  &trans    &trans    &trans     &trans    &kp UNDER   &kp PLUS         &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
-                             &kp LGUI    &trans  &kp SPACE      &kp RET     &trans         &kp RALT
+&kp GRAVE   &kp EXCL         &kp AT      &kp HASH              &kp DLLR              &kp PRCNT         &kp MINUS    &kp EQUAL  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH   &kp BSPC
+&kp TILDE  &kp CARET  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS    &kp UNDERSCORE     &kp PLUS    &kp LEFT_BRACE    &kp RIGHT_BRACE       &kp PIPE  &kp GRAVE
+&kp LSHFT        &kp            &kp           &kp                   &kp                    &kp         &kp UNDER     &kp PLUS          &kp LBRC           &kp RBRC       &kp PIPE  &kp TILDE
+                                         &kp LGUI                   &kp              &kp SPACE           &kp RET  &somestring          &kp RALT
             >;
+
+            label = "FUNCTION";
         };
 
-        test_layer {
+        numpad_layer {
             bindings = <
-    &kp L  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET   &kp AMPS  &kp KP_MULTIPLY  &kp LPAR  &kp RPAR   &kp BSPC
-&kp LCTRL    &trans  &trans    &trans    &trans     &trans    &kp MINUS  &kp EQUAL         &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT    &trans  &trans    &trans    &trans     &trans    &kp UNDER   &kp PLUS         &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
-                             &kp LGUI    &trans  &kp SPACE      &kp RET     &trans         &kp RALT
+&none      &kp KP_PLUS  &kp N7     &kp N8  &kp N9        &kp CARET    &kp CARET   &kp AMPS  &kp KP_MULTIPLY  &kp LPAR  &kp RPAR   &kp BSPC
+&none        &kp ENTER  &kp N4     &kp N5  &kp N6  &kp KP_ASTERISK    &kp MINUS  &kp EQUAL         &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
+&none  &kp KP_SUBTRACT  &kp N1     &kp N2  &kp N3    &kp KP_DIVIDE    &kp UNDER   &kp PLUS         &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
+                                &kp COMMA  &kp N0       &kp PERIOD      &kp RET     &trans         &kp RALT
             >;
+
+            label = "NUMPAD";
         };
     };
 };
